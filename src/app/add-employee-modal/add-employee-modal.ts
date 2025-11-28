@@ -19,8 +19,8 @@ export class AddEmployeeModal {
   employeeForm!: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder,    private appwrite: AppwriteService
-) { }
+  constructor(private fb: FormBuilder, private appwrite: AppwriteService
+  ) { }
 
   ngOnInit() {
     this.employeeForm = this.fb.group({
@@ -39,18 +39,18 @@ export class AddEmployeeModal {
   }
 
   async saveEmployee() {
-    if(this.employeeForm.invalid) return;
+    if (this.employeeForm.invalid) return;
 
-    this.loading  = true;
+    this.loading = true;
 
-    try{
+    try {
       const result = await this.appwrite.createEmployee(this.employeeForm.value);
       this.submitForm.emit(result);
       this.close.emit();
-    }catch(err){
-      console.error('Error saving employee:',err);
+    } catch (err) {
+      console.error('Error saving employee:', err);
 
-    }finally{
+    } finally {
       this.loading = false;
     }
   }
