@@ -1,0 +1,80 @@
+@if(show){
+<div class="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4" role="dialog" aria-modal="true"
+    aria-labelledby="modalTitle">
+    <div class="w-full max-w-xl rounded-lg bg-white p-6 shadow-lg">
+        <h2 id="modalTitle" class="text-xl font-bold text-gray-900 sm:text-2xl">Add Employee</h2>
+        <form [formGroup]="employeeForm">
+
+            <div class="grid grid-flow-col grid-rows-4 gap-4">
+
+
+                <div>
+                    <label for="Name" class="block">Name</label>
+
+                    <input formControlName="name" id="Name"
+                        class="mt-0.5 w-full h-10 rounded border-gray-300 shadow-sm sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="Email">Email</label>
+
+                    <input formControlName="email" id="Email"
+                        class="mt-0.5 w-full h-10 rounded border-gray-300 shadow-sm sm:text-sm">
+
+                </div>
+
+
+                <div>
+                    <label for="Department">Department</label>
+
+                    <input formControlName="department" id="Department"
+                        class="mt-0.5 w-full h-10 rounded border-gray-300 shadow-sm sm:text-sm">
+
+                </div>
+
+                <div>
+                    <label for="JobTitle">Job Title</label>
+
+                    <input formControlName="jobTitle" id="JobTitle"
+                        class="mt-0.5 w-full h-10 rounded border-gray-300 shadow-sm sm:text-sm">
+
+                </div>
+
+
+                <div>
+
+                    <label for="Contact">Contact </label>
+
+                    <input formControlName="contact" id="Contact"
+                        class="mt-0.5 w-full h-10 rounded border-gray-300 shadow-sm sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="Status">Status</label>
+
+                    <input formControlName="status" id="Status"
+                        class="mt-0.5 w-full h-10 rounded border-gray-300 shadow-sm sm:text-sm">
+
+                </div>
+
+            </div>
+        </form>
+
+        <div class="flex md:flex-1">
+            <div>
+                <button class="mt-4 bg-gray-800 text-white px-4 py-2  w-50 rounded" (click)="closeModal()">
+                    Close
+                </button>
+            </div>
+
+            <div>
+                <button class="mt-4 bg-blue-500 text-white px-4 py-2 w-50 ml-5 rounded" (click)="saveEmployee()">
+                    {{ loading ? 'Saving....' : 'Save Employ' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+}
