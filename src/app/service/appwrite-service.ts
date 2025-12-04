@@ -33,7 +33,7 @@ export class AppwriteService {
       environment.appwriteDatabaseId,
       environment.appwriteCollectionId,
       'unique()',
-      { data: data }
+      data
 
     );
   }
