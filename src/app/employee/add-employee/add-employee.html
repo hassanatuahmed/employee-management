@@ -1,135 +1,106 @@
 <app-main-navigation></app-main-navigation>
-<app-add-employee-modal [show]="showModal" (close)="closeModal()" (submitForm)="handleNewEmployee($event)"
-></app-add-employee-modal>
+<app-add-employee-modal [show]="showModal" (close)="closeModal()"
+    (submitForm)="handleNewEmployee($event)"></app-add-employee-modal>
 
 
 <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+    <div class="font-bold mb-6">Employee</div>
 
-   <div class="flex justify-between items-center w-full mb-6">
-     <div>
-        <input type="email" id="Email" placeholder="search" class=" rounded border-gray-300 px-3 py-3 w-72 shadow-sm sm:text-sm">
 
+    <div class="flex justify-between items-center w-full mb-6">
+        <div>
+            <input type="text" 
+             placeholder="search"
+             (input)="onSearch($event)"
+                class=" rounded border-gray-300 px-3 py-3 w-72 shadow-sm sm:text-sm">
+
+        </div>
+        <div>
+
+
+            <a class="inline-block rounded-sm border border-indigo-600 px-12 py-3 text-sm font-medium text-indigo-600 hover:bg-indigo-600 hover:text-white"
+                (click)="openModal()">
+                Add New
+            </a>
+        </div>
     </div>
-    <div>
-
-
-        <a class="inline-block rounded-sm border border-indigo-600 px-12 py-3 text-sm font-medium text-indigo-600 hover:bg-indigo-600 hover:text-white"
-            (click)="openModal()">
-            Add New
-        </a>
-    </div>
-   </div>
 
     <table class="min-w-full ">
-        <thead class="bg-gray-50 dark:bg-neutral-800">
+        <thead class="bg-gray-50 dark:bg-neutral-800 px-6 py-3">
+            <td class="px-6 py-3 font-bold">#</td>
+            <td class="px-6 py-3 font-bold">FirstName</td>
+            <td class="px-6 py-3 font-bold">LastName</td>
+            <td class="px-6 py-3 font-bold">Email</td>
+            <td class="px-6 py-3 font-bold">Department</td>
+            <td class="px-6 py-3 font-bold">Position</td>
+            <td class="px-6 py-3 font-bold">Number</td>
+            <td class="px-6 py-3 font-bold">Status</td>
+
+
+        </thead>
+        <tbody >
+            @if (filteredEmployees.length === 0) {
+            <tr>
+                <td colspan="8" class="text-center py-4 text-gray-500">
+                    No employees found.
+                </td>
+            </tr>
+            }
+
+            @for(emp of filteredEmployees; track emp.$id){
             <tr>
                 <th scope="col" class="px-6 py-3 text-start whitespace-nowrap">
                     <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        #
+                        {{$index + 1}}
                     </span>
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start whitespace-nowrap min-w-64">
                     <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        Name
+                        {{emp.firstName}}
+                    </span>
+                </th>
+
+                <th scope="col" class="px-6 py-3 text-start whitespace-nowrap min-w-64">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                        {{emp.lastName}}
                     </span>
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start whitespace-nowrap">
                     <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        Email
+                        {{emp.email}}
                     </span>
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start whitespace-nowrap">
                     <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        Department
+                        {{emp.department}}
                     </span>
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start whitespace-nowrap">
                     <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        Job Title
+                        {{emp.position}}
                     </span>
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start whitespace-nowrap">
                     <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        Contact
+                        {{emp.contact}}
                     </span>
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start whitespace-nowrap">
                     <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        Status
+                        {{emp.status}}
                     </span>
                 </th>
 
             </tr>
-        </thead>
-
-        <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-            <tr>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <button type="button"
-                        class="flex items-center gap-x-2 text-gray-800 hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400">
-                        <span class="text-sm text-gray-800 dark:text-neutral-200">1</span>
-                    </button>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <div class="flex items-center gap-x-3">
-                        <span class="font-semibold text-sm text-gray-800 dark:text-white">Bitcoin</span>
-                    </div>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-gray-800 dark:text-white">$26,869.14</span>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-red-500">-0.1%</span>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-green-500">0.3%</span>
-                </td>
-                <td class="h-px w-72 whitespace-nowrap">
-                    <span class="text-sm text-red-500">-3.8%</span>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-gray-800 dark:text-white">$15,438,433,675</span>
-                </td>
-
-            </tr>
-
-            <tr>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <button type="button"
-                        class="flex items-center gap-x-2 text-gray-800 hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400">
-                        <span class="text-sm text-gray-800 dark:text-neutral-200">2</span>
-                    </button>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <div class="flex items-center gap-x-3">
-                        <span class="font-semibold text-sm text-gray-800 dark:text-white">Ethereum</span>
-                    </div>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-gray-800 dark:text-white">$1,546.77</span>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-red-500">-0.2%</span>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-red-500">-0.1%</span>
-                </td>
-                <td class="h-px w-72 whitespace-nowrap">
-                    <span class="text-sm text-red-500">-5.7%</span>
-                </td>
-                <td class="size-px whitespace-nowrap px-6 py-3">
-                    <span class="text-sm text-gray-800 dark:text-white">$6,591,963,010</span>
-                </td>
-
-            </tr>
-
+            }
         </tbody>
+
+
     </table>
-    <!-- End Table -->
 </div>

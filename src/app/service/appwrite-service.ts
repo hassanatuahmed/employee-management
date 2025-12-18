@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Query } from '@angular/core';
 import { Account, Client, Databases, ID, TablesDB } from 'appwrite';
 import { environment } from '../../env/env';
 
@@ -36,6 +36,14 @@ export class AppwriteService {
       data
 
     );
+  }
+
+  async getEmployees(){
+    return await this.db.listRows(
+      environment.appwriteDatabaseId,
+      environment.appwriteCollectionId,
+      
+    )
   }
 
 }
